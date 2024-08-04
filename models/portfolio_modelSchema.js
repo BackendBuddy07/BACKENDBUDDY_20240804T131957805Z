@@ -1,88 +1,46 @@
 const mongoose = require('mongoose');
-const Schema = require("mongoose")
+const Schema = require('mongoose')
 
-const portfolio_modelSchema = new mongoose.Schema(
-        {
-                userId: {
-                        type: Schema.ObjectId,
-                        required: true,
-                        unique: false
-                },
-                balance: {
-                        type: Number,
-                        required: false,
-                        unique: false
-                },
-                portfolio: [
-                        {
-
-                                stockName: {
-                                        type: String,
-                                        required: false,
-                                        unique: false
-
-                                },
-                                stockBuyingPrice: [
-                                        {
-
-                                                stockBuyQuantity: {
-                                                        type: Number,
-                                                        required: false,
-                                                        unique: false
-
-                                                },
-
-                                                stockBuyPrice: {
-                                                        type: Number,
-                                                        required: false,
-                                                        unique: false
-
-                                                },
-
-                                                stockBuyDate: {
-                                                        type: String,
-                                                        required: false,
-                                                        unique: false
-
-                                                },
-                                        }
-                                ]
-                                ,
-                                stockSell: [
-                                        {
-
-                                                stockSellQuantity: {
-                                                        type: Number,
-                                                        required: false,
-                                                        unique: false
-
-                                                },
-
-                                                stockSellPrice: {
-                                                        type: Number,
-                                                        required: false,
-                                                        unique: false
-
-                                                },
-
-                                                stockSellDate: {
-                                                        type: String,
-                                                        required: false,
-                                                        unique: false
-
-                                                },
-                                        }
-                                ]
-                                ,
-
-                                stockRemainigQuantity: {
-                                        type: Number,
-                                        required: false,
-                                        unique: false
-
-                                },
-                        }
-                ],
-        });
-
-module.exports = mongoose.model('portfolio_model', portfolio_modelSchema);
+const portfolioSchema = new mongoose.Schema({
+    userId : {
+        type:Schema.ObjectId,
+        ref:"User",
+    },
+    balance:{
+        type:Number,
+    },
+    portfolio:[{
+        stockName:{
+            type:String,
+        },
+        stockBuyingPrice:[{
+            stockBuyQuantity : {
+                type:Number
+            },
+            stockBuyPrice: {
+                type:Number
+            },
+            stockBuyDate : {
+                type:String,
+            }
+        }],
+        stockSell:[{
+            stockSellQuantity : {
+                type:Number
+            },
+            stockSellPrice: {
+                type:Number
+            },
+            stockSellDate : {
+                type:String,
+            }
+        }],
+        stockRemainigQuantity:{
+            type:Number
+        }
+    }]
+    
+})
+const Portfolio = mongoose.model('Portfolio', portfolioSchema);
+  
+export default Portfolio;
